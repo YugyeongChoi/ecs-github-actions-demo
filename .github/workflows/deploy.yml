@@ -21,17 +21,17 @@ jobs:
 
     - name: Login to Amazon ECR Public
       run: |
-        aws ecr get-login-password --region us-east-1 | \     
-        docker login --username AWS --password-stdin 964283264517.dkr.ecr.ap-northeast-2.amazonaws.com
+        aws ecr-public get-login-password --region us-east-1 | \     
+        docker login --username AWS --password-stdin public.ecr.aws/k7c0r3r3/ecs-demo-repo:latest
 
     - name: Build Docker image
       run: |
         docker build -t ecs-demo-repo:latest .
-        docker tag 964283264517.dkr.ecr.ap-northeast-2.amazonaws.com/ecs-demo-repo:latest
+        docker tag ecs-demo-repo:latest public.ecr.aws/k7c0r3r3/ecs-demo-repo:latest
 
     - name: Push Docker image to ECR
       run: |
-        docker push 964283264517.dkr.ecr.ap-northeast-2.amazonaws.com/ecs-demo-repo:latest
+        docker push public.ecr.aws/k7c0r3r3/ecs-demo-repo:latest
 
     - name: Deploy to ECS (Fargate)
       run: |
@@ -40,4 +40,3 @@ jobs:
           --service ecs-demo-service \     # 본인 ECS 서비스 이름으로 변경
           --force-new-deployment \
           --region ap-northeast-2
-
