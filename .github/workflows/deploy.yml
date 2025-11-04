@@ -27,11 +27,11 @@ jobs:
     - name: Build Docker image
       run: |
         docker build -t ecs-demo-repo:latest .
-        docker tag ecs-demo-repo:latest public.ecr.aws/<본인 ECR 주소로 변경>/ecs-demo-repo:latest
+        docker tag 964283264517.dkr.ecr.ap-northeast-2.amazonaws.com/ecs-demo-repo:latest
 
     - name: Push Docker image to ECR
       run: |
-        docker push public.ecr.aws/<본인 ECR 주소로 변경>/ecs-demo-repo:latest
+        docker push 964283264517.dkr.ecr.ap-northeast-2.amazonaws.com/ecs-demo-repo:latest
 
     - name: Deploy to ECS (Fargate)
       run: |
